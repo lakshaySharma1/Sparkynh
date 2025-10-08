@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sparklynh | Empowering Digital Transformation</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;}
+    body {background-color: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s;}
+    :root {
+      --bg: #ffffff; --text: #222; --primary: #007bff; --secondary: #555;
+      --card-bg: #f5f5f5;
+    }
+    body.dark {
+      --bg: #121212; --text: #f1f1f1; --primary: #0dcaf0; --secondary: #ccc; --card-bg: #1e1e1e;
+    }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 5%; position: fixed; top:0; width:100%;
+      background: var(--bg); box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index:100;
+    }
+    .logo-container {display: flex; align-items: center; gap: 10px;}
+    .logo-container img {width: 40px; height: 40px; border-radius: 50%; object-fit: cover;}
+    .logo {font-size: 1.5rem; font-weight: 600; color: var(--primary);}
+    nav a {margin: 0 1rem; color: var(--text); text-decoration: none; font-weight: 500;}
+    nav a:hover {color: var(--primary);}
+    .toggle {cursor: pointer; font-size: 1.2rem;}
+
+    section {padding: 6rem 10% 4rem;}
+
+    /* Hero Section */
+    .hero {display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; min-height: 100vh;}
+    .hero-text {flex: 1 1 45%;}
+    .hero-text h1 {font-size: 3rem; margin-bottom: 1rem;}
+    .hero-text p {font-size: 1.1rem; color: var(--secondary); margin-bottom: 1.5rem;}
+    .hero-text button {
+      padding: 0.8rem 1.5rem; background: var(--primary);
+      border: none; border-radius: 8px; color: #fff; cursor: pointer;
+    }
+    .hero-text button:hover {background: #0056b3;}
+    .hero-images {flex: 1 1 50%; display: grid; grid-template-columns: repeat(2,1fr); gap: 10px;}
+    .hero-images img {width: 100%; border-radius: 12px; object-fit: cover; height: 220px;}
+
+    /* About */
+    .about {text-align: center;}
+    .about h2 {margin-bottom: 1rem; font-size: 2rem;}
+    .about p {color: var(--secondary); line-height: 1.7; max-width: 800px; margin: auto;}
+
+    /* Services */
+    .services h2, .team h2, .case h2, .contact h2 {
+      text-align: center; margin-bottom: 1rem; font-size: 2rem;
+    }
+    .service-cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .card {
+      background: var(--card-bg); padding: 1.5rem; border-radius: 12px;
+      text-align: center; transition: transform 0.3s;
+    }
+    .card:hover {transform: translateY(-5px);}
+    .card img {width: 60px; margin-bottom: 1rem;}
+    .card h3 {margin-bottom: 0.5rem;}
+
+    /* Team */
+    .team-members {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .team-member {
+      background: var(--card-bg); padding: 1.2rem;
+      border-radius: 12px; text-align: center;
+    }
+    .team-member img {
+      width: 100%; height: 220px; border-radius: 12px;
+      object-fit: cover; margin-bottom: 0.8rem;
+    }
+
+    /* Case History */
+    .case-items {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .case-item {background: var(--card-bg); padding: 1.2rem; border-radius: 12px;}
+    .case-item img {
+      width: 100%; height: 180px; object-fit: cover;
+      border-radius: 10px; margin-bottom: 0.8rem;
+    }
+
+    /* Contact */
+    .contact form {
+      max-width: 500px; margin: auto;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .contact input, .contact textarea {
+      padding: 0.8rem; border-radius: 8px;
+      border: 1px solid #ccc; background: var(--card-bg); color: var(--text);
+    }
+    .contact button {
+      padding: 0.8rem; background: var(--primary);
+      color: #fff; border: none; border-radius: 8px; cursor: pointer;
+    }
+
+    footer {text-align: center; padding: 2rem; background: var(--card-bg);}
+    footer a {color: var(--primary); margin: 0 10px; text-decoration: none;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="sparklynh logo.jpg" alt="Sparklynh Logo">
+      <div class="logo">Sparklynh</div>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#team">Team</a>
+      <a href="#case">Case History</a>
+      <a href="#contact">Contact</a>
+      <a href="careers.html" target="_blank">Careers</a>
+    </nav>
+    <div class="toggle">🌙</div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h1>Empowering Digital Transformation</h1>
+      <p>We help businesses innovate, automate, and scale with modern IT and CRM solutions tailored to their goals.</p>
+      <button onclick="document.querySelector('#services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+    </div>
+    <div class="hero-images">
+        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=600&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="">
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>Sparklynh Pvt. Ltd. is an IT consulting company specializing in Salesforce, CRM platforms, and cloud-based business solutions. We combine innovation and technology to deliver smarter, faster, and scalable digital solutions for startups and enterprises alike.</p>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-cards">
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="">
+        <h3>Salesforce Consulting</h3>
+        <p>Streamline business processes and enhance productivity with Salesforce implementation and automation.</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3208/3208707.png" alt="">
+        <h3>Web Development</h3>
+        <p>Modern, responsive, and secure websites built using the latest technologies for optimal performance.</p>
+      </div>
+      <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="">
+        <h3>Cloud Solutions</h3>
+        <p>Adopt scalable cloud architectures and optimize costs with AWS, Azure, and GCP integration.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="team">
+    <h2>Our Team</h2>
+    <div class="team-members">
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=600&q=80" alt="">
+        <h3>David Sharma</h3>
+        <p>CEO & Founder</p>
+      </div>
+      <div class="team-member">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCJOxssU3TRhutaiO3s3733_IH4YHOdCS6hg&s?auto=format&fit=crop&w=600&q=80" alt="">
+        <h3>Punu Ramlingam</h3>
+        <p>Lead Developer</p>
+      </div>
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" alt="">
+        <h3>Mr. Anonymous</h3>
+        <p>UI/UX Designer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case History -->
+  <section id="case" class="case">
+    <h2>Case History</h2>
+    <div class="case-items">
+      <div class="case-item">
+        <img src="https://www.axelerant.com/hubfs/Image%20%281%29.png?auto=format&fit=crop&w=600&q=80" alt="">
+        <h3>CRM Automation for Retail</h3>
+        <p>Implemented Salesforce automation for a retail client, reducing manual work by 60% and improving lead tracking accuracy.</p>
+      </div>
+      <div class="case-item">
+        <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437b5?auto=format&fit=crop&w=600&q=80" alt="">
+        <h3>Cloud Migration for Fintech</h3>
+        <p>Assisted a fintech startup in moving operations to AWS, enhancing uptime and scalability by 40%.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/mnqeylno" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Sparklynh Pvt. Ltd. | <a href="#home">Home</a> | <a href="careers.html" target="_blank">Careers</a></p>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.toggle');
+    toggle.addEventListener('click', () => document.body.classList.toggle('dark'));
+  </script>
+</body>
+</html>
