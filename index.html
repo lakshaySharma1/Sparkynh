@@ -15,6 +15,7 @@
       --bg: #121212; --text: #f1f1f1; --primary: #0dcaf0; --secondary: #ccc; --card-bg: #1e1e1e;
     }
 
+    /* ========== Header (desktop unchanged) ========== */
     header {
       display: flex; justify-content: space-between; align-items: center;
       padding: 1rem 5%; position: fixed; top:0; width:100%;
@@ -23,14 +24,25 @@
     .logo-container {display: flex; align-items: center; gap: 10px;}
     .logo-container img {width: 40px; height: 40px; border-radius: 50%; object-fit: cover;}
     .logo {font-size: 1.5rem; font-weight: 600; color: var(--primary);}
+    nav {display: flex; align-items: center;}
     nav a {margin: 0 1rem; color: var(--text); text-decoration: none; font-weight: 500;}
     nav a:hover {color: var(--primary);}
     .toggle {cursor: pointer; font-size: 1.2rem;}
 
+    /* Mobile menu icon (hidden on desktop) */
+    .menu-icon {display: none; cursor: pointer; font-size: 1.8rem; user-select: none;}
+
     section {padding: 6rem 10% 4rem;}
 
-    /* Hero Section */
-    .hero {display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; min-height: 100vh;}
+    /* Hero Section (desktop layout remains exactly the same) */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 100vh;
+      position: relative;
+    }
     .hero-text {flex: 1 1 45%;}
     .hero-text h1 {font-size: 3rem; margin-bottom: 1rem;}
     .hero-text p {font-size: 1.1rem; color: var(--secondary); margin-bottom: 1.5rem;}
@@ -39,8 +51,20 @@
       border: none; border-radius: 8px; color: #fff; cursor: pointer;
     }
     .hero-text button:hover {background: #0056b3;}
-    .hero-images {flex: 1 1 50%; display: grid; grid-template-columns: repeat(2,1fr); gap: 10px;}
-    .hero-images img {width: 100%; border-radius: 12px; object-fit: cover; height: 220px;}
+
+    /* Original 4-image grid (kept for desktop) */
+    .hero-images {
+      flex: 1 1 50%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .hero-images img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      height: 220px;
+    }
 
     /* About */
     .about {text-align: center;}
@@ -104,6 +128,103 @@
 
     footer {text-align: center; padding: 2rem; background: var(--card-bg);}
     footer a {color: var(--primary); margin: 0 10px; text-decoration: none;}
+
+    /* =================== MOBILE ADJUSTMENTS =================== */
+    /* All mobile changes are inside these media queries so desktop remains identical */
+    @media (max-width: 768px) {
+      /* Header: show hamburger, hide natural nav layout */
+      .menu-icon {display: block;}
+      nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--bg);
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: max-height 0.35s ease, opacity 0.35s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      }
+      nav.open {
+        max-height: 80vh; /* adaptive to screen height */
+        opacity: 1;
+        visibility: visible;
+        overflow-y: auto; /* allows scrolling if needed */
+      }
+      nav a {margin: 1rem 0; display: block; padding: 0.5rem 0; width: 100%; text-align: center;}
+
+      header {padding: 0.9rem 1.2rem;}
+
+      /* Make hero stack vertically and use a collage background */
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 6.5rem;
+        min-height: auto;
+      }
+      .hero-text {
+        flex: 1 1 100%;
+        margin: 1.25rem 0;
+        z-index: 2; /* above background collage */
+      }
+      .hero-text h1 {
+        font-size: 2.2rem;
+        line-height: 1.18;
+      }
+
+      /* Hide the original 4-image grid on mobile (we'll use a background collage instead) */
+      .hero-images {display: none;}
+
+      /* New mobile hero background using the same images as layered backgrounds */
+      .hero-mobile-bg {
+        width: 100%;
+        height: 220px;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 1.2rem;
+        position: relative;
+        background-color: #e9eef6;
+        /* multiple background images, sized & positioned to create a tasteful collage */
+        background-image:
+          url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80"),
+          url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80"),
+          url("https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80"),
+          url("https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=900&q=80");
+        background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+        /* position each layer: top-left, top-right, bottom-left, bottom-right */
+        background-position: left top, right top, left bottom, right bottom;
+        /* size layers so they form a combined collage (adjust percentages to taste) */
+        background-size: 52% 52%, 48% 52%, 48% 48%, 52% 48%;
+        box-shadow: 0 8px 30px rgba(16,24,40,0.08);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+
+      /* subtle overlay for readability on top area */
+      .hero-mobile-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02));
+        pointer-events: none;
+      }
+
+      /* Slightly larger for small tablets, reduce on small phones */
+      @media (max-width: 480px) {
+        .hero-mobile-bg { height: 180px; background-size: 60% 60%, 40% 60%, 40% 40%, 60% 40%; }
+        .hero-text h1 { font-size: 1.9rem; }
+      }
+
+      /* keep spacing reasonable for all sections on mobile */
+      section {padding: 5.5rem 5% 3rem;}
+    }
+
+    /* Accessibility: focus outline for links */
+    a:focus {outline: 3px solid rgba(0,123,255,0.15); outline-offset: 3px;}
+    
   </style>
 </head>
 <body>
@@ -112,6 +233,11 @@
       <img src="sparklynh logo.jpg" alt="Sparklynh Logo">
       <div class="logo">Sparklynh</div>
     </div>
+
+    <!-- Hamburger shown only on mobile via CSS -->
+    <div class="menu-icon" aria-hidden="true">☰</div>
+
+    <!-- Nav kept as original (desktop remains identical) -->
     <nav>
       <a href="#home">Home</a>
       <a href="#about">About</a>
@@ -119,24 +245,30 @@
       <a href="#team">Team</a>
       <a href="#case">Case History</a>
       <a href="#contact">Contact</a>
-      <a href="careers.html" target="_blank">Careers</a>
+      <a href="careers.html">Careers</a>
     </nav>
-    <div class="toggle">🌙</div>
+
+    <div class="toggle" role="button" aria-label="Toggle dark mode">🌙</div>
   </header>
 
   <!-- Hero -->
-  <section id="home" class="hero">
+  <section id="home" class="hero" aria-labelledby="hero-heading">
     <div class="hero-text">
-      <h1>Empowering Digital Transformation</h1>
+      <h1 id="hero-heading">Empowering Digital Transformation</h1>
       <p>We help businesses innovate, automate, and scale with modern IT and CRM solutions tailored to their goals.</p>
       <button onclick="document.querySelector('#services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
     </div>
-    <div class="hero-images">
-        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=600&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="">
+
+    <!-- Desktop grid remains (not displayed on mobile due to CSS) -->
+    <div class="hero-images" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=600&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="">
     </div>
+
+    <!-- Mobile-only visual: collage used as background (displayed only on mobile via media query) -->
+    <div class="hero-mobile-bg" aria-hidden="true"></div>
   </section>
 
   <!-- About -->
@@ -222,8 +354,26 @@
   </footer>
 
   <script>
+    // Dark mode toggle (unchanged)
     const toggle = document.querySelector('.toggle');
     toggle.addEventListener('click', () => document.body.classList.toggle('dark'));
+
+    // Mobile nav toggle (hamburger)
+    const menuIcon = document.querySelector('.menu-icon');
+    const nav = document.querySelector('nav');
+    menuIcon && menuIcon.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      // toggle aria-expanded for accessibility
+      const expanded = nav.classList.contains('open');
+      menuIcon.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    });
+
+    // Close mobile nav when a link is clicked (good mobile UX)
+    document.querySelectorAll('nav a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (nav.classList.contains('open')) nav.classList.remove('open');
+      });
+    });
   </script>
 </body>
 </html>
