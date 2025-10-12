@@ -1,114 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Careers | Sparklynh Pvt. Ltd.</title>
-  <style>
-    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;}
-    body {background-color: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s;}
-    :root {
-      --bg: #ffffff; --text: #222; --primary: #007bff; --secondary: #555;
-      --card-bg: #f5f5f5;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Careers | Sparklynh Pvt. Ltd.</title>
+<style>
+  * {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  body {background-color: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s;}
+  :root {
+    --bg:#ffffff; --text:#222; --primary:#007bff; --secondary:#555; --card-bg:#f5f5f5;
+  }
+  body.dark {
+    --bg:#121212; --text:#f1f1f1; --primary:#0dcaf0; --secondary:#ccc; --card-bg:#1e1e1e;
+  }
+
+  header {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1rem 5%; position:fixed; top:0; width:100%;
+    background: var(--bg); box-shadow:0 2px 10px rgba(0,0,0,0.1); z-index:100;
+  }
+  .logo {font-size:1.5rem; font-weight:600; color: var(--primary);}
+  nav {display:flex; align-items:center; gap:1rem;}
+  nav a {color:var(--text); text-decoration:none; font-weight:500;}
+  nav a:hover {color: var(--primary);}
+  .toggle {cursor:pointer; font-size:1.3rem; margin-left:10px;}
+  .menu-icon {display:none; font-size:1.6rem; cursor:pointer; background:none; border:none; color:var(--text);}
+
+  section {padding:4rem 10%;}
+
+  .hero {
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:2rem;
+    margin-top:70px; /* offset header */
+  }
+  .hero-text {flex:1 1 400px; text-align:center;}
+  .hero-text h1 {font-size:2.5rem; margin-bottom:1rem; color:var(--primary);}
+  .hero-text p {color:var(--secondary); font-size:1.1rem; margin-bottom:1.5rem;}
+  .hero-img {flex:1 1 400px; display:flex; justify-content:center; align-items:center;}
+  .hero-img img {width:100%; max-width:500px; border-radius:15px; box-shadow:0 5px 20px rgba(0,0,0,0.2);}
+
+  .opportunities {text-align:center; font-size:2rem; color:var(--primary); margin:3rem 0 1.5rem;}
+
+  .jobs {display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:1.5rem;}
+  .job {background:var(--card-bg); padding:1.5rem; border-radius:12px; text-align:center; transition: transform 0.3s; display:flex; flex-direction:column; align-items:center;}
+  .job:hover {transform: translateY(-5px);}
+  .job img {width:100%; height:180px; object-fit:cover; border-radius:12px; margin-bottom:1rem;}
+  .job h3 {margin-bottom:0.5rem; color:var(--primary);}
+  .job p {color:var(--secondary);}
+  .job button {margin-top:1rem; padding:0.8rem 1.5rem; background:var(--primary); color:#fff; border:none; border-radius:8px; cursor:pointer;}
+  .job button:hover {background:#0056b3;}
+
+  footer {text-align:center; padding:2rem; background:var(--card-bg);}
+  footer a {color:var(--primary); margin:0 10px; text-decoration:none;}
+
+  /* MOBILE NAV */
+  @media(max-width:850px){
+    .menu-icon {display:block;}
+    nav {
+      position:absolute; top:100%; left:0; width:100%;
+      background:var(--bg); flex-direction:column;
+      align-items:center; gap:0; overflow:hidden;
+      display:none; /* hide completely by default */
+      box-shadow:0 5px 12px rgba(0,0,0,0.08);
     }
-    body.dark {
-      --bg: #121212; --text: #f1f1f1; --primary: #0dcaf0; --secondary: #ccc; --card-bg: #1e1e1e;
-    }
+    nav.open {display:flex;}
+    nav a {display:block; width:100%; padding:0.9rem 1rem; text-align:center; border-top:1px solid rgba(0,0,0,0.04); margin:0;}
+    header {padding:0.9rem 1.2rem;}
+  }
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem; /* reduced from 2rem */
+    margin-top: 70px; /* offset header */
+  }
+  .hero-text {
+    flex: 1 1 400px;
+    text-align: center;
+    margin-bottom: 1rem; /* optional: reduces spacing on mobile stack */
+  }
+  .hero-img {
+    flex: 1 1 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-img img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+  @media(max-width:768px){
+    .hero {flex-direction: column; margin-top: 60px; padding-bottom:1.5rem; gap:0.5rem;} /* smaller gap for stacked layout */
+    .hero-text, .hero-img {flex:1 1 auto;}
+  }
+  
+  @media(max-width:768px){
+    .hero {flex-direction:column; margin-top:60px; padding-bottom:1rem;}
+    .jobs {margin-top:1rem;}
+  }
 
-    header {display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; position: fixed; top:0; width:100%; background: var(--bg); box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index:100;}
-    .logo {font-size: 1.5rem; font-weight: 600; color: var(--primary);}
-    nav a {margin: 0 1rem; color: var(--text); text-decoration: none; font-weight: 500;}
-    nav a:hover {color: var(--primary);}
-    .toggle {cursor: pointer; font-size: 1.2rem;}
-
-    section {padding: 6rem 10% 4rem;}
-
-    /* Hero */
-    .hero {display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2rem; padding-top: 6rem;}
-    .hero-text {flex: 1 1 400px; text-align: center;}
-    .hero-text h1 {font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);}
-    .hero-text p {color: var(--secondary); font-size: 1.1rem; margin-bottom: 1.5rem;}
-    .hero-img {flex: 1 1 400px; display: flex; justify-content: center; align-items: center;}
-    .hero-img img {width: 100%; max-width: 500px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);}
-
-    /* Jobs */
-    .jobs {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem;}
-    .job {background: var(--card-bg); padding: 1.5rem; border-radius: 12px; text-align: center; transition: transform 0.3s; display: flex; flex-direction: column; align-items: center;}
-    .job:hover {transform: translateY(-5px);}
-    .job img {width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem;}
-    .job h3 {margin-bottom: 0.5rem; color: var(--primary);}
-    .job p {color: var(--secondary);}
-    .job button {margin-top: 1rem; padding: 0.8rem 1.5rem; background: var(--primary); color: #fff; border: none; border-radius: 8px; cursor: pointer;}
-    .job button:hover {background: #0056b3;}
-
-    footer {text-align: center; padding: 2rem; background: var(--card-bg);}
-    footer a {color: var(--primary); margin: 0 10px; text-decoration: none;}
-  </style>
+  a:focus{outline:3px solid rgba(0,123,255,0.15); outline-offset:3px;}
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">Sparklynh</div>
-    <nav>
-      <a href="index.html#home">Home</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#services">Services</a>
-      <a href="index.html#team">Team</a>
-      <a href="index.html#case">Case History</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="careers.html" target="_self" style="color: var(--primary); font-weight:600;">Careers</a>
-    </nav>
-    <div class="toggle">🌙</div>
-  </header>
 
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Join Our Team</h1>
-      <p>Be part of Sparklynh's mission to drive innovation and digital transformation across industries. Explore roles that fit your skills and passion.</p>
-    </div>
-    <div class="hero-img">
-      <img src="https://plus.unsplash.com/premium_photo-1661771773771-a093c948ba92?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FyZWVyfGVufDB8fDB8fHww?auto=format&fit=crop&w=600&q=80" alt="Career Illustration">
-    </div>
-  </section>
+<header>
+  <div class="logo">Sparklynh</div>
+  <button class="menu-icon" aria-label="Open menu" aria-expanded="false">☰</button>
+  <nav>
+    <a href="index.html#home">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#team">Team</a>
+    <a href="index.html#case">Case History</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="careers.html" target="_self" style="color: var(--primary); font-weight:600;">Careers</a>
+  </nav>
+  <div class="toggle" role="button" aria-label="Toggle dark mode">🌙</div>
+</header>
 
-  <section class="jobs">
-    <div class="job">
-      <img src="https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=600&q=80" alt="Salesforce Developer">
-      <h3>Salesforce Developer Trainee</h3>
-      <p>Join our CRM development team and gain hands-on experience with Apex, LWC, and API integrations. A great start for aspiring Salesforce Developers.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5H8Fot7ZsSoqsWAhf1gPx7dYVu-iKbyB4UfbMpJYR2fKGxg/viewform" target="_blank">
-        <button>Apply Now</button>
-      </a>
-      
-    </div>
+<section class="hero">
+  <div class="hero-text">
+    <h1>Join Our Team</h1>
+    <p>Be part of Sparklynh's mission to drive innovation and digital transformation across industries. Explore roles that fit your skills and passion.</p>
+  </div>
+  <div class="hero-img">
+    <img src="https://plus.unsplash.com/premium_photo-1661771773771-a093c948ba92?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FyZWVyfGVufDB8fDB8fHww?auto=format&fit=crop&w=600&q=80" alt="Career Illustration">
+  </div>
+</section>
+<div class="opportunities">Available Opportunities</div>
+<section class="jobs">
+  <div class="job">
+    <img src="https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=600&q=80" alt="Salesforce Developer">
+    <h3>Salesforce Developer Trainee</h3>
+    <p>Join our CRM development team and gain hands-on experience with Apex, LWC, and API integrations. A great start for aspiring Salesforce Developers.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5H8Fot7ZsSoqsWAhf1gPx7dYVu-iKbyB4UfbMpJYR2fKGxg/viewform" target="_blank"><button>Apply Now</button></a>
+  </div>
+  <div class="job">
+    <img src="https://www.astera.com/wp-content/uploads/2023/08/edi-image.jpg?auto=format&fit=crop&w=600&q=80" alt="EDI Developer">
+    <h3>EDI Developer</h3>
+    <p>Designs, implements, and maintains Electronic Data Interchange (EDI) systems to ensure seamless data exchange between business partners and internal systems.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5H8Fot7ZsSoqsWAhf1gPx7dYVu-iKbyB4UfbMpJYR2fKGxg/viewform" target="_blank"><button>Apply Now</button></a>
+  </div>
+  <div class="job">
+    <img src="https://static.thechief.io/prod/images/Cloud-Computing-the-Futu.width-730.format-webp-lossless.webp?auto=format&fit=crop&w=600&q=80" alt="Cloud Engineer">
+    <h3>Cloud Engineer</h3>
+    <p>Implement, optimize, and manage cloud infrastructure with AWS, Azure, and GCP. Ensure performance, scalability, and security while driving automation and cost efficiency.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5H8Fot7ZsSoqsWAhf1gPx7dYVu-iKbyB4UfbMpJYR2fKGxg/viewform" target="_blank"><button>Apply Now</button></a>
+  </div>
+</section>
 
-    <div class="job">
-      <img src="https://www.astera.com/wp-content/uploads/2023/08/edi-image.jpg?auto=format&fit=crop&w=600&q=80" alt="EDI Developer">
-      <h3>EDI Developer</h3>
-      <p>Designs, implements, and maintains Electronic Data Interchange (EDI) systems to ensure seamless data exchange between business partners and internal systems.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5H8Fot7ZsSoqsWAhf1gPx7dYVu-iKbyB4UfbMpJYR2fKGxg/viewform" target="_blank">
-        <button>Apply Now</button>
-      </a>
-      
-    </div>
+<footer>
+  <p>© 2025 Sparklynh Pvt. Ltd. | <a href="index.html#home">Back to Home</a></p>
+</footer>
 
-    <div class="job">
-      <img src="https://static.thechief.io/prod/images/Cloud-Computing-the-Futu.width-730.format-webp-lossless.webp?auto=format&fit=crop&w=600&q=80" alt="Cloud Engineer">
-      <h3>Cloud Engineer</h3>
-      <p>Implement, optimize, and manage cloud infrastructure with AWS, Azure, and GCP. Ensure performance, scalability, and security while driving automation and cost efficiency.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd5H8Fot7ZsSoqsWAhf1gPx7dYVu-iKbyB4UfbMpJYR2fKGxg/viewform" target="_blank">
-        <button>Apply Now</button>
-      </a>
-      
-    </div>
-  </section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector('.toggle');
+  const body = document.body;
+  if(localStorage.getItem('theme')==='dark'){body.classList.add('dark'); toggle.textContent='☀️';}
+  toggle.addEventListener('click',()=>{
+    body.classList.toggle('dark');
+    toggle.textContent=body.classList.contains('dark')?'☀️':'🌙';
+    localStorage.setItem('theme',body.classList.contains('dark')?'dark':'light');
+  });
 
-  <footer>
-    <p>© 2025 Sparklynh Pvt. Ltd. | <a href="index.html#home">Back to Home</a></p>
-  </footer>
-
-  <script>
-    const toggle = document.querySelector('.toggle');
-    toggle.addEventListener('click', () => document.body.classList.toggle('dark'));
-  </script>
+  const menuIcon=document.querySelector('.menu-icon');
+  const nav=document.querySelector('nav');
+  menuIcon.addEventListener('click',()=>{
+    nav.classList.toggle('open');
+    menuIcon.setAttribute('aria-expanded', nav.classList.contains('open')?'true':'false');
+    menuIcon.setAttribute('aria-label', nav.classList.contains('open')?'Close menu':'Open menu');
+  });
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+});
+</script>
 </body>
 </html>
